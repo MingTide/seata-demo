@@ -1,0 +1,16 @@
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.baomidou:mybatis-plus-boot-starter'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation('com.alibaba.cloud:spring-cloud-starter-alibaba-seata') {
+        exclude(group: 'io.seata', module: 'seata-spring-boot-starter')
+    }
+
+    implementation  'io.seata:seata-spring-boot-starter'
+    implementation 'mysql:mysql-connector-java'
+    implementation 'org.projectlombok:lombok:'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
