@@ -1,0 +1,94 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.11'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'application'
+    id 'java'
+    id 'java-library'
+    id "io.freefair.lombok" version "6.3.0"
+}
+
+
+bootJar {
+    setArchivesBaseName("srp-boot")
+    setVersion("0.0.1-SNAPSHOT")
+}
+ext {
+    seataVersion = '1.4.2'
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.freefair.lombok'
+
+    tasks.withType(Javadoc).all { enabled = false }
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    tasks.withType(Javadoc) {
+        options.encoding = 'UTF-8'
+    }
+
+    group = 'com.medaxis.srp'
+    version = '1.3.0-SNAPSHOT'
+    sourceCompatibility = '17'
+
+    repositories {
+
+        maven{
+            url "https://maven.aliyun.com/nexus/content/repositories/central/"
+
+        }
+        maven {
+            //指定通过不安全的HTTP连接与仓库通信是否可接受
+            allowInsecureProtocol = true
+            url 'http://192.168.0.219:8081/repository/maven-public/'
+            credentials {
+                username 'deployment'
+                password 'medaxis2021'
+            }
+        }
+        //	mavenLocal()
+        mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2021.0.4" // 或者最新的2021.0.x版本
+            mavenBom 'com.alibaba.cloud:spring-cloud-alibaba-dependencies:2021.0.4.0'
+        }
+        dependencies{
+            dependency 'com.baomidou:mybatis-plus-boot-starter:3.4.2'
+            dependency  ("io.seata:seata-spring-boot-starter:${seataVersion}")
+        }
+
+    }
+
+}
+
+
+dependencies {
+
+}
+
+subprojects {
+    bootJarMainClassName {
+        enabled(false)
+    }
+    bootJar {
+        enabled(false)
+    }
+}
+test {
+    useJUnitPlatform()
+}
+
+
+
+
+
+
