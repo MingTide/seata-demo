@@ -30,13 +30,10 @@ seata:
       server-addr: 192.168.0.244:8848
       namespace: ""
       group: DEFAULT_GROUP
-      application: seata-tc-server
+      application: seata-server
       username: nacos
       password: nacos
   tx-service-group: seata-demo # 事务组名称
-#  service:
-#    vgroup-mapping: # 事务组与cluster的映射关系
-#      seata-demo: SH
   data-source-proxy-mode: XA
   config:
     type: nacos
@@ -44,5 +41,5 @@ seata:
       server-addr: 192.168.0.244:8848
       username: nacos
       password: nacos
-      group: SEATA_GROUP
+      group: DEFAULT_GROUP
       data-id: client.properties

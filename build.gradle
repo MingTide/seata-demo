@@ -43,16 +43,7 @@ allprojects {
             url "https://maven.aliyun.com/nexus/content/repositories/central/"
 
         }
-        maven {
-            //指定通过不安全的HTTP连接与仓库通信是否可接受
-            allowInsecureProtocol = true
-            url 'http://192.168.0.219:8081/repository/maven-public/'
-            credentials {
-                username 'deployment'
-                password 'medaxis2021'
-            }
-        }
-        //	mavenLocal()
+
         mavenCentral()
     }
 
